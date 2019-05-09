@@ -67,77 +67,40 @@ class Coins extends Component {
   }
 
   componentDidMount() {
-    this.dataCoins();
+    //this.dataCoins();
+    var url = new URL("https://cmc-node-app.herokuapp.com/charts/getchartdata");
+    axios
+      .post(url, {
+        params: {
+          type: "TreeMap",
+          category: "TopCoinsBlockchain"
+        },
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => {
+        // res.data.slice(0);
+        res.data.splice(0, 1);
 
-    // var url = new URL("https://cmc-node-app.herokuapp.com/charts/getchartdata");
-    // // var url = new URL("http://localhost:4000/charts/getchartdata");
-    // axios({
-    //   method: "GET",
-    //   url: url,
-    //   data: {
-    //     params: {
-    //       type: "TreeMap",
-    //       category: "TopCoinsBlockchain"
-    //     }
-    //   },
-    //   headers: {
-    //     "content-type": "application/json"
-    //   }
-    // })
-    //   .then(function(response) {
-    //     console.log("Sucess data");
-    //     console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+        const obj = {
+          // color: "#bcb2b1",
+          id: "Other Coins",
+          name: "Others",
+          parent: null,
+          // percent_change: 2.34074,
+          // price_usd: "$6,000.60",
+          value: 10615888899.29
+        };
+        res.data.push(obj);
 
-    // fetch("https://cmc-node-app.herokuapp.com/charts/getchartdata", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   data: {
-    //     params: {
-    //       type: "TreeMap",
-    //       category: "TopCoinsBlockchain"
-    //     }
-    //   }
-    // }).then(json => {
-    //   console.log(json);
-    //   // this.setState({
-    //   //   treeData: formatData(json)
-    //   // });
-    // });
-
-    // axios
-    //   .get(url, {
-    //     params: {
-    //       type: "TreeMap",
-    //       category: "TopCoinsBlockchain"
-    //     }
-    //   })
-    //   .then(data => {
-    //     console.log("sucesssss");
-    //     console.log(data);
-    //   });
-    //Working
-    // fetch(
-    //   "https://gist.githubusercontent.com/whawker/809cae1781f25db5f3c2dd7cee93b017/raw/94ca755307ac5651686467b5fa1844659b5817a3/data.json"
-    // )
-    //   .then(res => {
-    //     if (res.ok) {
-    //       console.log("sucess!!");
-    //       return res.json();
-    //     }
-    //     console.log("fail!!");
-    //     //throw new Error("Network response was not ok.");
-    //   })
-    //   .then(json => {
-    //     this.setState({
-    //       treeData: formatData(json)
-    //     });
-    //   });
+        Object.keys(res.data).map((d, key) => {
+          if (res.data[key].parent == "Top Coins - Blockchain")
+            res.data[key].parent = null;
+        });
+        console.log(res.data);
+        this.setState({ treeData: res.data });
+      });
   }
 
   dataCoins = async () => {
@@ -226,11 +189,11 @@ class Coins extends Component {
         borderWidth: 3,
         dataLabels: {
           enabled: false,
-          style: {
-            fontSize: "45px",
-            color: "#FFFFFF",
-            fontWeight: "bold"
-          },
+          // style: {
+          //   fontSize: "45px",
+          //   color: "#FFFFFF",
+          //   fontWeight: "bold"
+          // },
           allowOverlap: true
         },
         borderColor: "red",
