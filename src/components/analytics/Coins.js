@@ -63,109 +63,64 @@ class Coins extends Component {
     super(props);
     this.state = {
       treeData: null
-      // treemapData: [
-      //   {
-      //     name: "AXD",
-      //     id: "AXD",
-      //     value: 3,
-      //     color: "#33FFFF"
-      //   },
-
-      //   {
-      //     name: "BTC",
-      //     id: "BTC",
-      //     value: 1,
-      //     color: "#FF334C"
-      //   },
-
-      //   {
-      //     name: "XYT",
-      //     id: "XYT",
-      //     value: 2,
-      //     color: "#3633FF"
-      //   },
-      //   {
-      //     name: "ETH",
-      //     id: "ETH",
-      //     value: 1,
-      //     color: "#FF334C"
-      //   },
-      //   {
-      //     name: "OTHERS",
-      //     value: 1,
-      //     id: "OTHERS",
-      //     color: "#A9A4A9"
-      //   },
-      //   {
-      //     name: "OTHERS-1",
-      //     value: 1,
-      //     id: "OTHERS1",
-      //     parent: "OTHERS",
-      //     color: "#FF334C"
-      //   },
-      //   {
-      //     name: "OTHERS-2",
-      //     value: 1,
-      //     id: "OTHERS2",
-      //     parent: "OTHERS",
-      //     color: "#CFD801"
-      //   },
-      //   {
-      //     name: "OTHERS-3",
-      //     value: 1,
-      //     id: "OTHERS2",
-      //     parent: "OTHERS",
-      //     color: "#C6AA0D"
-      //   },
-      //   {
-      //     name: "OTHERS-4",
-      //     value: 3,
-      //     id: "OTHERS2",
-      //     parent: "OTHERS",
-      //     color: "#0DC667"
-      //   },
-      //   {
-      //     name: "OTHERS-5",
-      //     value: 10,
-      //     id: "OTHERS2",
-      //     parent: "OTHERS",
-      //     color: "#B2C60D"
-      //   },
-      //   {
-      //     name: "OTHERS-6",
-      //     value: 2,
-      //     id: "OTHERS2",
-      //     parent: "OTHERS",
-      //     color: "#0DC6C6"
-      //   }
-      // ]
     };
   }
 
   componentDidMount() {
-    var url = new URL("https://cmc-node-app.herokuapp.com/charts/getchartdata");
-    // var url = new URL(
-    //   "https://gist.githubusercontent.com/whawker/809cae1781f25db5f3c2dd7cee93b017/raw/94ca755307ac5651686467b5fa1844659b5817a3/data.json"
-    // );
+    this.dataCoins();
 
-    axios
-      .get(url, {
-        data: {
-          params: {
-            type: "TreeMap",
-            category: "TopCoinsBlockchain"
-          }
-        },
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        }
-      })
-      .then(res => {
-        console.log("sucesssss");
-        console.log(res.data);
-      });
+    // var url = new URL("https://cmc-node-app.herokuapp.com/charts/getchartdata");
+    // // var url = new URL("http://localhost:4000/charts/getchartdata");
+    // axios({
+    //   method: "GET",
+    //   url: url,
+    //   data: {
+    //     params: {
+    //       type: "TreeMap",
+    //       category: "TopCoinsBlockchain"
+    //     }
+    //   },
+    //   headers: {
+    //     "content-type": "application/json"
+    //   }
+    // })
+    //   .then(function(response) {
+    //     console.log("Sucess data");
+    //     console.log(response);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
 
+    // fetch("https://cmc-node-app.herokuapp.com/charts/getchartdata", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   data: {
+    //     params: {
+    //       type: "TreeMap",
+    //       category: "TopCoinsBlockchain"
+    //     }
+    //   }
+    // }).then(json => {
+    //   console.log(json);
+    //   // this.setState({
+    //   //   treeData: formatData(json)
+    //   // });
+    // });
+
+    // axios
+    //   .get(url, {
+    //     params: {
+    //       type: "TreeMap",
+    //       category: "TopCoinsBlockchain"
+    //     }
+    //   })
+    //   .then(data => {
+    //     console.log("sucesssss");
+    //     console.log(data);
+    //   });
     //Working
     // fetch(
     //   "https://gist.githubusercontent.com/whawker/809cae1781f25db5f3c2dd7cee93b017/raw/94ca755307ac5651686467b5fa1844659b5817a3/data.json"
@@ -185,6 +140,36 @@ class Coins extends Component {
     //   });
   }
 
+  dataCoins = async () => {
+    const coins = this.getCoins()
+      .then(response => {
+        if (response.data) {
+          console.log(response);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  getCoins = () => {
+    try {
+      return axios.get(
+        "https://cmc-node-app.herokuapp.com/charts/getchartdata",
+        {
+          data: {
+            params: {
+              type: "TreeMap",
+              category: "TopCoinsBlockchain"
+            }
+          }
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   onClick = e => {
     // alert(
     //   "Id :" +
@@ -198,6 +183,7 @@ class Coins extends Component {
 
   render() {
     const treeData = this.state.treeData;
+    //const treemapData = this.state.treemapData;
     if (!treeData) return null;
 
     const drilldown = [
