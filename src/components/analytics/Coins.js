@@ -81,24 +81,24 @@ class Coins extends Component {
       })
       .then(res => {
         // res.data.slice(0);
-        res.data.splice(0, 1);
+        // res.data.splice(0, 1);
 
-        const obj = {
-          // color: "#bcb2b1",
-          id: "Other Coins",
-          name: "Others",
-          parent: null,
-          // percent_change: 2.34074,
-          // price_usd: "$6,000.60",
-          value: 10615888899.29
-        };
-        res.data.push(obj);
+        // const obj = {
+        //   // color: "#bcb2b1",
+        //   id: "Other Coins",
+        //   name: "Others",
+        //   parent: null,
+        //   // percent_change: 2.34074,
+        //   // price_usd: "$6,000.60",
+        //   value: 10615888899.29 //This will be sun of childs
+        // };
+        // res.data.push(obj);
 
-        Object.keys(res.data).map((d, key) => {
-          if (res.data[key].parent == "Top Coins - Blockchain")
-            res.data[key].parent = null;
-        });
-        console.log(res.data);
+        // Object.keys(res.data).map((d, key) => {
+        //   if (res.data[key].parent == "Top Coins - Blockchain")
+        //     res.data[key].parent = null;
+        // });
+        // console.log(res.data);
         this.setState({ treeData: res.data });
       });
   }
@@ -201,14 +201,40 @@ class Coins extends Component {
       }
     ];
     const tooltipFormatter = function() {
-      // return `${this.key}: ${this.point.value}`;
+      //  const formattedValue = formatNumber(this.point.value);
+      //console.log(formattedValue);
       const val = `${this.key}: ${this.point.value}`;
+
       return (
         '<span style="font-size:15px;color:blue;font-weight:bold">' +
         val +
         "</span><br>"
       );
     };
+
+    function formatNumber(x) {
+      if (isNaN(x)) return x;
+
+      if (x < 9999) {
+        return x;
+      }
+      if (x < 1000000) {
+        return Math.round(x / 1000) + "K";
+      }
+      if (x < 10000000) {
+        return (x / 1000000).toFixed(2) + "M";
+      }
+
+      if (x < 1000000000) {
+        return Math.round(x / 1000000) + "M";
+      }
+
+      if (x < 1000000000000) {
+        return Math.round(x / 1000000000) + "B";
+      }
+
+      return "1T+";
+    }
 
     return (
       <div className="app">
