@@ -108,7 +108,7 @@ class Coins extends Component {
     const tooltipFormatter = function() {
       const formattedValue = formatNumber(this.point.value);
       console.log(this.point);
-      const coinDetails = `${this.key}: ${formattedValue}`;
+      const coinDetails = `${this.key}: $${formattedValue}`;
       const percentageChanged = Number(this.point.percent_change).toFixed(2);
       return (
         '<span style="font-size:15px;color:blue;font-weight:bold">' +
@@ -125,10 +125,10 @@ class Coins extends Component {
 
     function formatNumber(x) {
       if (x > 1000000) {
-        return Math.round(x / 1000000) + "M";
+        return Math.abs(x / 1000000).toFixed(2) + "M";
       }
       if (x > 1000000000) {
-        return Math.round(x / 1000000000) + "B";
+        return Math.abs(x / 1000000000).toFixed(2) + "B";
       }
       return "1T+";
     }
