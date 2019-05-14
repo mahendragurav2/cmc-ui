@@ -4,6 +4,7 @@ import Coins from "./components/analytics/Coins";
 import Tokens from "./components/analytics/Tokens";
 import Exchanges from "./components/analytics/Exchanges";
 import Countries from "./components/analytics/Countries";
+import CoinMaster from "./components/admin/CoinMaster";
 
 class Main extends Component {
   render() {
@@ -31,6 +32,7 @@ class Main extends Component {
           <Route path="/tokens" component={Tokens} />
           <Route exact path="/exchanges" component={Exchanges} />
           <Route path="/countries" component={Countries} />
+          <Route path="/coinmaster" component={CoinMaster} />
         </div>
       </HashRouter>
     );
