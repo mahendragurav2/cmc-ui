@@ -31,9 +31,7 @@ class CoinMaster extends Component {
   }
   render() {
     const cmData = this.state.cmData;
-    return cmData.map(row => {
-      <p>test</p>;
-    });
+    return <p>test</p>;
   }
 }
 

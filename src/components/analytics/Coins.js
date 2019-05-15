@@ -6,6 +6,7 @@ import axios from "axios";
 import {
   HighchartsChart,
   withHighcharts,
+  Title,
   Subtitle,
   XAxis,
   YAxis,
@@ -57,15 +58,15 @@ class Coins extends Component {
     const drilldown = [
       {
         drillUpButton: {
-          relativeTo: "spacingBox",
+          relativeTo: "plotBox",
           position: {
             y: 0,
             x: 0
           },
           theme: {
-            fill: "white",
-            "stroke-width": 1,
-            stroke: "silver",
+            // fill: "white",
+            //"stroke-width": 1,
+            //stroke: "silver",
             r: 0,
             states: {
               hover: {
@@ -85,24 +86,31 @@ class Coins extends Component {
       {
         level: 1,
         dataLabels: {
-          enabled: true
-        },
-        borderWidth: 3
+          enabled: true,
+          style: {
+            fontSize: "12px",
+            color: "#000000",
+            fontWeight: "normal",
+            textOutline: false
+          }
+        }
+        //borderWidth: 0.5
       },
       {
         level: 2,
         borderWidth: 3,
         dataLabels: {
           enabled: false,
-          // style: {
-          //   fontSize: "45px",
-          //   color: "#FFFFFF",
-          //   fontWeight: "bold"
-          // },
+          style: {
+            fontSize: "12px",
+            color: "#000000",
+            background: "#000000",
+            fontWeight: "normal"
+          },
           allowOverlap: true
-        },
-        borderColor: "red",
-        borderWidth: 1
+        }
+        // borderColor: "red",
+        //borderWidth: 0.5
       }
     ];
     const tooltipFormatter = function() {
@@ -135,7 +143,7 @@ class Coins extends Component {
     return (
       <div className="app">
         <HighchartsChart>
-          <Subtitle>Top 50 Coins</Subtitle>
+          <Title>Top 50 Coins</Title>
           <XAxis />
           <YAxis>
             <TreemapSeries
