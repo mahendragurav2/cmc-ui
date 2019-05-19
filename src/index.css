@@ -52,3 +52,18 @@ ul.header li a {
 .active {
   background-color: #0099ff;
 }
+
+.highcharts-background {
+  fill: transparent;
+}
+
+.highcharts-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  line-height: normal;
+  z-index: 0; /* #1072 */
+  font-size: 12px;
+}

@@ -117,6 +117,7 @@ class Coins extends Component {
       const formattedValue = formatNumber(this.point.value);
       console.log(this.point);
       const coinDetails = `${this.key}: $${formattedValue}`;
+      const price_coin = this.point.price_usd;
       const percentageChanged = Number(this.point.percent_change).toFixed(2);
       return (
         '<span style="font-size:15px;color:blue;font-weight:bold">' +
@@ -126,6 +127,10 @@ class Coins extends Component {
         "(" +
         percentageChanged +
         "%)" +
+        "<br>" +
+        '<span style="font-size:15px;color:blue;font-weight:bold">' +
+        "Price: " +
+        price_coin +
         "</span>" +
         "</span><br>"
       );
@@ -148,6 +153,7 @@ class Coins extends Component {
           <YAxis>
             <TreemapSeries
               data={treeData}
+              styledMode={true}
               onClick={this.onClick}
               allowDrillToNode
               borderColor="#777c7a"
