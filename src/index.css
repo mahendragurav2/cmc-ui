@@ -54,7 +54,7 @@ ul.header li a {
 }
 
 .highcharts-background {
-  fill: transparent;
+  fill: white;
 }
 
 .highcharts-container {
