@@ -128,7 +128,7 @@ class Coins extends Component {
         percentageChanged +
         "%)" +
         "<br>" +
-        '<span style="font-size:15px;color:blue;font-weight:bold">' +
+        '<span style="font-size:15px;color:blue">' +
         "Price: " +
         price_coin +
         "</span>" +
