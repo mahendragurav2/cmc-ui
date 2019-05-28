@@ -120,10 +120,10 @@ class Coins extends Component {
       const price_coin = this.point.price_usd;
       const percentageChanged = Number(this.point.percent_change).toFixed(2);
       return (
-        '<span style="font-size:15px;color:blue;font-weight:bold">' +
+        '<span style="font-size:15px;color:blue">' +
         coinDetails +
         "<br>" +
-        '<span style="font-size:15px;color:blue;font-weight:bold">' +
+        '<span style="font-size:15px;color:blue">' +
         "(" +
         percentageChanged +
         "%)" +
