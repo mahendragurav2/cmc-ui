@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
-import Coins from "./components/analytics/Coins";
+import CoinsMain from "./components/analytics/CoinsMain";
 import Tokens from "./components/analytics/Tokens";
 import Exchanges from "./components/analytics/Exchanges";
 import Countries from "./components/analytics/Countries";
@@ -28,7 +28,7 @@ class Main extends Component {
             </li>
           </ul>
           {/* <div className="tokens" /> */}
-          <Route exact path="/" component={Coins} />
+          <Route exact path="/" component={CoinsMain} />
           <Route path="/tokens" component={Tokens} />
           <Route exact path="/exchanges" component={Exchanges} />
           <Route path="/countries" component={Countries} />

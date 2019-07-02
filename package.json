@@ -5,10 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "highcharts": "^7.1.1",
+    "highcharts-react-official": "^2.2.2",
     "react": "^16.8.6",
     "react-alert": "^5.4.0",
     "react-d3-treemap": "^1.0.14",
     "react-dom": "^16.8.6",
+    "react-highcharts": "^16.0.2",
     "react-jsx-highcharts": "^3.5.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
